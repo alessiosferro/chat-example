@@ -8,7 +8,7 @@ startApplication(app, http, port);
 
 io.on('connection', socket => {
   console.log('a user connected');
-  socket.broadcast.emit('chat message', 'you suck');
+  // socket.broadcast.emit('chat message', 'you suck');
 
   socket.on('disconnect', () => {
     console.log('user disconnected');

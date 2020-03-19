@@ -9,8 +9,25 @@
   </head>
   <body>
     <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+    <form class="form" action="">
+      <div class="form-wrapper">
+        <input
+          class="form-input form-input--normal"
+          id="user"
+          autocomplete="off"
+          placeholder="Nome"
+        />
+        <div class="message-wrapper">
+          <input
+            class="form-input form-input--large"
+            +
+            id="m"
+            autocomplete="off"
+            placeholder="Messaggio"
+          />
+          <button class="form-button">Invia</button>
+        </div>
+      </div>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -30,7 +47,6 @@
       socket.on('chat message', msg => {
         const msgItem = document.createElement('li');
         msgItem.textContent = msg;
-        console.log(msg);
         messages.appendChild(msgItem);
       });
     </script>
