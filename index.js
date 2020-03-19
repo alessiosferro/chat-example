@@ -20,7 +20,7 @@ io.on('connection', socket => {
   });
 
   socket.on('is writing', user => {
-    io.emit('is writing', user);
+    socket.broadcast.emit('is writing', user);
   });
 
   socket.on('end writing', () => {

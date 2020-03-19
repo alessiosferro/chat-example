@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Socket Chat</title>
+    <title>Sferrochat</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
@@ -67,6 +67,7 @@
           } alle ${new Date().toLocaleTimeString()}) ${message.value}`
         );
         message.value = '';
+        socket.emit('end writing');
       });
 
       socket.on('chat message', msg => {
