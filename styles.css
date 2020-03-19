@@ -133,4 +133,8 @@ form {
     .message-wrapper>.form-input {
         margin-right: 1rem;
     }
+    .is-writing {
+        position: fixed;
+        bottom: 13rem;
+    }
 }

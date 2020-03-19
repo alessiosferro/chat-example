@@ -8,7 +8,7 @@ startApplication(app, http, port);
 
 io.on('connection', socket => {
   console.log('utente connesso');
-  io.emit('chat message', 'Utente connesso');
+  socket.broadcast.emit('chat message', 'Utente connesso');
 
   socket.on('disconnect', () => {
     console.log('utente disconnesso');
@@ -16,12 +16,11 @@ io.on('connection', socket => {
 
   socket.on('chat message', msg => {
     console.log('messaggio', msg);
-    socket.broadcast.emit('chat message', msg);
+    io.emit('chat message', msg);
   });
 
   socket.on('is writing', user => {
-    console.log(user);
-    socket.broadcast.emit('is writing', user);
+    io.emit('is writing', user);
   });
 
   socket.on('end writing', () => {

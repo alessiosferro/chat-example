@@ -55,7 +55,7 @@
       });
 
       socket.on('end writing', () => {
-        isWriting.innerHTML = '';
+        isWriting.textContent = '';
       });
 
       form.addEventListener('submit', e => {
