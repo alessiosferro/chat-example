@@ -9,6 +9,7 @@
   </head>
   <body>
     <ul id="messages"></ul>
+    <p class="is-writing" id="writing"></p>
     <form class="form" action="">
       <div class="form-wrapper">
         <input
@@ -36,10 +37,35 @@
       const form = document.querySelector('form');
       const message = document.getElementById('m');
       const messages = document.getElementById('messages');
+      const user = document.getElementById('user');
+      const isWriting = document.getElementById('writing');
+
+      message.addEventListener('input', e => {
+        const value = e.target.value;
+
+        if (value.length > 0) {
+          socket.emit('is writing', user.value ? user.value : 'Anonimo');
+        } else {
+          socket.emit('end writing');
+        }
+      });
+
+      socket.on('is writing', user => {
+        isWriting.textContent = `${user} sta scrivendo...`;
+      });
+
+      socket.on('end writing', () => {
+        isWriting.innerHTML = '';
+      });
 
       form.addEventListener('submit', e => {
         e.preventDefault();
-        socket.emit('chat message', message.value);
+        socket.emit(
+          'chat message',
+          `(${
+            user.value ? user.value : 'Anonimo'
+          } alle ${new Date().toLocaleTimeString()}) ${message.value}`
+        );
         message.value = '';
       });
 

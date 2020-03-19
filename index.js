@@ -7,15 +7,25 @@ const io = require('socket.io')(http);
 startApplication(app, http, port);
 
 io.on('connection', socket => {
-  console.log('a user connected');
-  // socket.broadcast.emit('chat message', 'you suck');
+  console.log('utente connesso');
+  io.emit('chat message', 'Utente connesso');
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('utente disconnesso');
   });
 
   socket.on('chat message', msg => {
-    console.log(`Message: ${msg}`);
-    io.emit('chat message', msg);
+    console.log('messaggio', msg);
+    socket.broadcast.emit('chat message', msg);
+  });
+
+  socket.on('is writing', user => {
+    console.log(user);
+    socket.broadcast.emit('is writing', user);
+  });
+
+  socket.on('end writing', () => {
+    console.log('ha smesso di scrivere');
+    socket.broadcast.emit('end writing');
   });
 });

@@ -63,6 +63,13 @@ form {
     color: #fff;
 }
 
+.is-writing {
+    position: fixed;
+    color: #fff;
+    bottom: 8rem;
+    left: 2rem;
+}
+
 .form-button {
     --offset: 4px;
     border: none;
